@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="src/output.css">
+    <script src="node_modules/axios/dist/axios.min.js"></script>
+    <script src="register.js" defer></script>
+</head>
+<body class="h-lvh bg-violet-400 flex justify-center items-center flex-col">
+    <h1 class="mb-2 font-medium">Registeration Form </h1>
+    <form id="form" class="max-w-lg bg-gray-300 p-14 rounded-md">
+        <!-- Profile Image ----------------------------------------------------->
+        <img src="https://th.bing.com/th/id/OIP.ESxXNnztkffareLocbdhxAHaHa?pid=ImgDet&w=207&h=207&c=7&dpr=1.5"
+        class=" w-28 h-28 " alt="default image">
+        <!-- Full Name ------------------------------------------------------------>
+        <label for="name" class="block text-black my-2">Full Name</label>
+        <input type="text" id="name" class="block outline-none px-3 rounded" name="name" required>
+        <!-- User Name -------------------------------------------------->
+        <label for="user" class="block my-2">UserName</label>
+        <input type="text" id="username" class="block outline-none px-3 rounded"  name="username" required>
+        <!-- Email--------------------------------------------------------------->
+        <label for="email" class="block text-black my-2">Email</label>
+        <input type="email" id="email" class="block outline-none px-3 rounded " name="email" required>
+        <!-- Set PassWord---------------------------------------------------------->
+        <label for="pass" class="block text-black my-2">Password</label>
+        <input type="password"   id="password" class="block outline-none px-3 rounded " name="password" required>
+        <!----------------------------------------------------------------------->
+        <input type="file" name="image" accept="image/*" id="profile" style="display: none;">
+
+        <!-------------------------------------- choose image-------------------------------------->
+        <div class="flex justify-between my-3 gap-2">
+            <label for="profile" class="text-white bg-blue-600 p-2 rounded-sm cursor-pointer">Choose Image Profile</label>
+            <button type="button" class="bg-none">No Image</button>
+        </div>
+        <!------------------------------------------------------------------------------------------------>
+        <button type="submit" class="w-full text-center bg-blue-600 my-2 text-white p-2 
+        rounded-md transition duration-700 ease-in hover:bg-blue-950"  id="send">Register Now</button>
+        
+        <h5>Have an Account?<a href="Login.html" class="text-blue-700  transition duration-700 ease-in hover:text-white hover:bg-blue-700 p-1 hover:rounded-md hover:mt-2">Log In</a></h5>
+    </form>
+    
+</body>
+</html>

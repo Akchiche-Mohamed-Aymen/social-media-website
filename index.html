@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="home.css">
+    <script src="home.js" defer></script>
+    <script src="login.js" defer></script>
+    <script src="node_modules/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+    body{position: relative;}
+        .succ , .failed{
+            width: fit-content;
+            position: fixed;
+            bottom: 3px;
+            right: -100000000px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .succ{
+            color: green;
+            background-color: rgba(0, 128, 0, 0.306);
+        }
+        .failed{
+            color: red;
+            background-color: rgba(255, 0, 0, 0.368);
+        }
+        .showRes{
+            transition: 2s;
+            right:10px;
+        }
+        </style>
+</head>
+<body>
+    <div class="succ" id='succAdd'>New comment was added</div>
+    <div class="failed "  id="failedAdd"> Error in adding comment !!</div>
+    <div class="alertSucc" id="alertSucc">
+        <h5>succesuful loggin</h5>
+        <button type="button" id="toggleShow">X</button>
+    </div>
+    </form>
+  
+    <div class="container">
+        <header>
+            <div>
+                <h3 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 30px; ;" >Tawasol</h3>
+                <h4 style="cursor: pointer" onclick="rePost()"><i class="fa-solid fa-house" style="font-size: 20px; opacity: .8;"></i></h4>
+                <p style="cursor: pointer; " class="profile">Profile</p>
+            </div>
+            <button type="button" id="addPost" onclick="location = 'updatePost.html'">+</button>
+            <div id="auth"></div>
+        </header>
+        <div class="deletePost">
+            <h3> do you want to delete this post ?</h3>
+            <div>
+                <button type="button" id="noDel">Cancel</button>
+                <button type="button" id="del">Delete</button>
+            </div>
+    
+        </div>
+        <form action="">
+            <div class="left">
+                <button id="cancel2" type="button">x</button>
+            </div>
+            <label for="user">UserName</label>
+            <input type="text" id="user" required>
+            <label for="pass">Password</label>
+            <input type="password" id="pass" required>
+            <div class="left">
+                <button id='cancel' type="button">Cancel</button>
+                <button id='log' type="button">Login</button>
+            </div>
+        </form>
+        <div class="posts"></div>
+    </div>
+</body>
+
+</html>

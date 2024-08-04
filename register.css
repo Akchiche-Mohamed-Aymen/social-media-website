@@ -1,0 +1,18 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+img{
+    border-radius: 50%; 
+    margin: auto;
+    border: 1px solid blue;
+    overflow: hidden;
+    padding: 7px;
+}
+input{
+    width: 100%;
+}
+.bg-none{
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 10px;
+}

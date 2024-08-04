@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="updatePost.js" defer></script>
+    <script src="node_modules/axios/dist/axios.min.js"></script>
+    <link href="src/output.css" rel="stylesheet">
+    <title>Document</title>
+    <style>
+    div{
+        width: fit-content;
+        position: fixed;
+        bottom: 3px;
+        right: -100000000px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .succ{
+        color: green;
+        background-color: rgba(0, 128, 0, 0.306);
+    }
+    .failed{
+        color: red;
+    }
+    .showRes{
+        transition: 2s;
+        right:10px;
+    }
+</style>
+</head>
+<body>
+    <body class="h-lvh bg-violet-200 flex justify-center items-center flex-col pb-20">
+        <form class="max-w-md w-full h-80" >
+            <img src="https://wallpapers.com/images/featured/amh1tqh06166z417.jpg" class="w-full h-60 mb-6" alt="">
+            <input type="file" name="image" accept="image/*" id="postPohto" class="hidden">
+            <label for="postPohto" class="block w-full text-center text-white bg-blue-500 p-1" style="cursor: pointer;">Upload the post image</label>
+    
+            <label for="title" class="block mb-1">Enter the post title :</label>
+            <input type="text" name="title" id="title" class="outline-none p-1 w-full">
+    
+            <label for="body" class="block mb-1">Enter the post body:</label>
+            <input type="text" name="body" id="body" class='outline-none p-1 w-full'>
+    
+            <button type="button" class="w-full p-2 bg-blue-400 hover:bg-blue-700 text-center text-white mt-3">Update post</button>
+        </form>
+        <div class="succ" ></div>
+        <div class="failed bg-red-300" > </div>
+</body>
+<script>
+   
+</script>
+</html>

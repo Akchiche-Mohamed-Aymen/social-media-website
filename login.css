@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+label{
+    display: block;
+}
+body{position: relative;}
+form{
+    max-width: 700px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 130px auto 0 ;
+    position: absolute;
+    top: -1000px;
+    background-color: white;
+    z-index: 200;
+}
+form *{
+    width: 100%;
+    padding: 15px;
+}
+input{
+    width: 95%;
+    margin: 10px auto ;
+    background-color: rgba(128, 128, 128, 0.477);
+    border-radius: 7px;
+}
+.left{
+    display: flex;
+     justify-content: end;
+     gap: 10px;
+}
+.error{
+    width: fit-content;
+    color: red;
+    background-color: rgba(255, 0, 0, 0.377);
+    border: 2px solid red;
+    border-radius: 7px ;
+    padding: 10px;
+    position: absolute;
+    top: -100px;
+}
+.active{
+    transition: 2s;
+    position: fixed;
+    top: 10px;
+}
+button{
+    background-color: rgba(0, 0, 255, 0.726);
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 7px;
+    width: fit-content;
+}
+#log:hover {
+    transition: 2s;
+    background-color: blue;
+}
+a{
+    color: blueviolet;
+}
+a:hover{color: blue;}
+ .last button:first-child{
+    width: 30px;
+    background-color: red;
+    margin-right: 20px;
+    padding: 7px;
+    font-size: 19px;
+}
+#cancel{
+    background-color: gray;
+    width: fit-content;
+}
+@media (max-width:650px){
+    *{font-weight: 400;}
+    form{
+        max-width: 450px;
+        padding: 25px;
+        margin: 10px 30px;
+    }
+    button{
+        margin:  10px auto 0;
+    }
+}
+
+h1{
+    margin-top: 100px;
+}

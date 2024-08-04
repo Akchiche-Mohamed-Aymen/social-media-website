@@ -1,0 +1,279 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+body{
+    background-color:rgba(137, 43, 226, 0.233);
+    position: relative;
+}
+.container{
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+header , header div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px; 
+    gap: 10px;
+}
+header img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.container header{
+    position: fixed;
+    background-color: white;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 10px 0 5px;
+    top: 0;
+  
+}
+header button{
+    background-color: white;
+    border: 1.5px solid rgb(41, 128, 0);
+    width: fit-content;
+    padding: 7px;
+    color: rgb(41, 128, 0);
+    border-radius: 5px;
+    cursor:pointer;
+}
+header button:hover{
+    transition: 2s;
+    background-color: rgb(41, 128, 0);
+    color: white;
+    border: none;
+}
+.posts{
+   
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 90px auto 0;
+}
+.post{
+    background-color: white;
+    padding: 10px ;
+    max-width: 700px;
+    width: 100%;
+}
+.profile-img {
+    background-color:rgba(169, 169, 169, 0.331);
+    margin-bottom: 8px;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-left: 10px;
+}
+.profile-img img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 5px 0;
+    cursor: pointer;
+}
+.profile-img button{
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    
+}
+.img img{
+    width: 100%;
+    height: 280px;
+    border-radius: 5px;
+}
+.bodyPost{
+    border-bottom:  1px solid;
+    padding: 0 0 9px 19px;
+    color: rgba(0, 0, 0, 0.806);
+    margin:0 0  10px 0;
+}
+.post button{
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    margin: 10px 5px 10px 0;
+    font-size: 15px;
+    color: black;
+}
+.time{
+    color: rgba(128, 128, 128, 0.747);
+}
+[class ^='comments']{
+    display: none;
+   
+}
+.comment{
+    margin-top: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.tag{
+    width: fit-content;
+    background-color: gray;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 7px
+}
+.tag:last-child{
+    margin-right: 0;
+}
+.comment:hover{
+    color: white;
+    cursor: pointer;
+    transition: 2s;
+    background-color: grey;
+   
+}
+.active{
+    display: block;
+}
+header #logout{
+    color: red;
+    border-color: red;
+}
+header #logout:hover{
+    transition: 2s;
+    color: white;
+    border: none;
+    background-color: red;
+}
+#addPost{
+    height: 30px;
+    width: 30px;
+    border-radius: 40%;
+    color: white;
+    background-color: rgba(0, 0, 255, 0.726);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    display: none;
+    padding-bottom: 6px;
+}
+.alertSucc{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(172, 255, 47, 0.717);
+    align-items: center;
+    padding: 10px;
+    width: 350px;
+    color: green;
+    position: fixed;
+    right: -1000000px;
+    bottom: 10px;
+}
+.newComment{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.newComment input{
+    width: 85%;
+    border-radius: 2px;
+    padding: 20px;
+}
+.newComment button{
+    width: fit-content;
+    color: white;
+    background-color: rgba(0, 0, 255, 0.831);
+    padding: 20px;
+}
+.alertSucc button {
+    width: fit-content;
+    background-color: white;
+    padding: 10px;
+    color: black;
+}
+.show{
+    transition: 2s;
+    right: 10px;
+    z-index: 10000; 
+}
+.comment img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.deletePost{
+    width: fit-content;
+    padding: 10px;
+    background-color:#2c3f50;
+    border-radius: 5px;
+    position: fixed;
+    top: -100px;
+    left: 10px;
+    color: white;
+}
+.deletePost button{
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: red;
+}
+.deletePost div{
+    display: flex;
+    justify-content: right;
+    gap: 5px;
+}
+.deletePost button:first-child{
+    background-color: grey;
+}
+.showDelete{
+    top: 10px;
+    transition: 3s;
+    scroll-behavior: smooth;
+}
+.personInfo{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.personInfo img{
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+}
+.statisticInfo{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.profileInfo{
+    width: fit-content;
+    padding: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items:  center;
+    height: 100px;
+    gap: 15px;
+    margin: 40px auto;
+    border-radius: 5px;
+}
+@media (max-width: 650px ){
+    *{font-weight: 400;}
+    .tag{display: block; margin: 0 0 5px 10px; min-width: 100px; text-align: center;}
+    header{
+        flex-direction: column;
+        gap: 0px;
+        justify-content: center;
+    }
+}
