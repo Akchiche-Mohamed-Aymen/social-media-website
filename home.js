@@ -69,14 +69,14 @@ function createPost(postItem ,userId,postId , src1 , src2 , username , timing , 
     let profile = profileImg(src1 , username , userId)
     if(tokenItem !== null && userId === userInfo.id){
     
-   let div = document.createElement('div')
-   div.appendChild(createButton('<i class="fa-solid fa-pen-nib"></i>' , `location = 'updatePost.html?postId=${postId}'`))
-   div.appendChild(createButton('<i class="fa-solid fa-trash"></i>' ,`deletePost(${postId} , ${JSON.stringify(postItem)})`))
-   div.style.display= 'flex';
-   div.style.width= '100%';
-   div.style.gap= '10px';
-   div.style.justifyContent = 'right'
-   profile.appendChild(div)
+        let div = document.createElement('div')
+        div.appendChild(createButton('<i class="fa-solid fa-pen-nib"></i>' , `location = 'updatePost.html?postId=${postId}'`))
+        div.appendChild(createButton('<i class="fa-solid fa-trash"></i>' ,`deletePost(${postId} , ${JSON.stringify(postItem)})`))
+        div.style.display= 'flex';
+        div.style.width= '100%';
+        div.style.gap= '10px';
+        div.style.justifyContent = 'right'
+        profile.appendChild(div)
 
        }
     div.appendChild(profile);
@@ -99,8 +99,12 @@ function createComment(text , src){
     return div;  
 }
 
-function createPosts(index){
-    fetch(`${webUrl}?limit=5&&page=${index}`)
+function createPosts(type = true ,index , link = webUrl){
+    let url =''
+    if(type == true)
+        url = `${webUrl}?limit=5&&page=${index}`
+    else url = link
+    fetch(url)
     .then( response =>response.json())
     .then((response)=> {
         let post = response.data;
@@ -112,7 +116,8 @@ function createPosts(index){
                 imgpro = defaultProfile;
             if(isEmpty(imgPost))
                 imgPost = '';
-
+            let comments =document.createElement('div')
+            comments.className = `comments${post[i].id}`;
             let postItem = createPost(post[i],post[i].author.id,post[i].id,imgpro, imgPost ,
                  post[i].author.username , post[i].created_at,
                  post[i].title ,post[i].body ,
@@ -121,6 +126,7 @@ function createPosts(index){
                     let tagEle = `<span class="tag">${post[i].tags[j].name}</span>`
                     postItem.innerHTML+=tagEle;
                  }
+        
             posts.appendChild(postItem);
         }
    if(tokenItem)
@@ -236,7 +242,7 @@ function reset(display){
 
 function showProfile(id){
     deletePosts()
-    axios.get(`https://tarmeezacademy.com/api/v1/users/${id}`)
+    axios(`https://tarmeezacademy.com/api/v1/users/${id}`)
     .then(response=> {
         let items = response.data.data;
         let div = document.createElement('div')
@@ -261,10 +267,22 @@ function showProfile(id){
         div3.appendChild(h3)
         div3.appendChild(h23)
         div.appendChild(div3)
-   
-        posts.appendChild(div)
+        posts.appendChild(div)    
+        
     })
     .catch(err => console.log(err))
+    createPosts(false , 1 , `https://tarmeezacademy.com/api/v1/users/${id}/posts`)
+        let page = 1;
+        onscroll = ()=>{
+            let end =  (window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight
+            if(end && page <= lastPage){
+                page++;
+                createPosts(false , page , `https://tarmeezacademy.com/api/v1/users/${id}/posts`)  
+            }
+        else if(page > lastPage)
+            alert('no posts')
+        }
+            
 }
 function deletePosts(){
     for( let i = 0 ; i < posts.children.length; i++)
@@ -288,4 +306,11 @@ function rePost(){
         buttons.forEach(button =>button.remove())
       
     }
+}
+let bars =document.querySelector('.fa-bars') 
+bars.onclick =()=>{
+    document.querySelector('header').classList.toggle('showHeader');
+}
+document.querySelector('header').onclick = ()=>{
+ bars.click()
 }

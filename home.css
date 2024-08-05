@@ -3,10 +3,14 @@
     padding: 0;
     font-family:Arial, Helvetica, sans-serif;
     font-weight: 500;
+    scroll-behavior: smooth;
 }
 body{
     background-color:rgba(137, 43, 226, 0.233);
     position: relative;
+}
+.bars{
+    display: none;
 }
 .container{
     max-width: 700px;
@@ -271,9 +275,43 @@ header #logout:hover{
 @media (max-width: 650px ){
     *{font-weight: 400;}
     .tag{display: block; margin: 0 0 5px 10px; min-width: 100px; text-align: center;}
-    header{
+    header , header * {
         flex-direction: column;
         gap: 0px;
-        justify-content: center;
+        justify-content: flex-start;
+        align-items:flex-start;
+    }
+    .container header{
+        width: fit-content;
+        padding: 10px;
+        left : -200px;
+        top: 20px;
+    }
+    
+    header #addPost{
+        margin:  auto;
+       
+    }
+    .posts{
+        margin: 0;
+    }
+    .bars{
+        display: block;
+        position: fixed;
+        top:0;
+        z-index: 2000;
+        i{
+            cursor: pointer;
+        }
+    }
+    .posts .post{
+        max-width: 95vw;
+        width: 100%;
+    }
+    .container .showHeader{
+        position: fixed;
+        left: 0;
+        z-index: 200;
+        transition: 3s;
     }
 }
