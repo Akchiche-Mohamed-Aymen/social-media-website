@@ -6,7 +6,7 @@ document.getElementById('log').onclick =()=>{
 let tokenItem = localStorage.getItem('token') ||  null;
 
 let userInfo = JSON.parse(localStorage.getItem('user'))|| null;
-console.log(userInfo)
+
 createPosts(1)
 let lastPage = 1;
 const defaultProfile = 'https://th.bing.com/th/id/OIP.ESxXNnztkffareLocbdhxAHaHa?pid=ImgDet&w=207&h=207&c=7&dpr=1.5'
@@ -108,7 +108,8 @@ function createPosts(type = true ,index , link = webUrl){
     .then( response =>response.json())
     .then((response)=> {
         let post = response.data;
-        lastPage = response.meta.last_page;
+        if(type)
+            lastPage = response.meta.last_page;
         for(let i = 0 ; i < post.length ; i++){
             let imgpro = post[i].author.profile_image;
             let imgPost = post[i].image;
@@ -117,6 +118,7 @@ function createPosts(type = true ,index , link = webUrl){
             if(isEmpty(imgPost))
                 imgPost = '';
             let comments =document.createElement('div')
+            comments.style.display = 'none'
             comments.className = `comments${post[i].id}`;
             let postItem = createPost(post[i],post[i].author.id,post[i].id,imgpro, imgPost ,
                  post[i].author.username , post[i].created_at,
@@ -126,8 +128,9 @@ function createPosts(type = true ,index , link = webUrl){
                     let tagEle = `<span class="tag">${post[i].tags[j].name}</span>`
                     postItem.innerHTML+=tagEle;
                  }
-        
+            postItem.appendChild(comments);
             posts.appendChild(postItem);
+           
         }
    if(tokenItem)
         reset('initial')
@@ -147,7 +150,7 @@ function scrolling(){
 }
 onscroll =  scrolling;
 function showComments(id){
-    let current =  document.querySelector(`button[onclick='showComments(${id})']`).parentElement;
+    let current = document.querySelector(`button[onclick='showComments(${id})'`).parentElement
    axios.get(`${webUrl}/${id}`)
    .then(response=>{
         for(let k = 0 ; k < posts.children.length ; k++)
@@ -159,20 +162,27 @@ function showComments(id){
         h1.innerHTML = `${response.data.data.author.username}'s post`;
         posts.prepend(h1)
         let commentsItems = response.data.data.comments
-        console.log(commentsItems)
+        let comments =document.querySelector(`.comments${id}`)
+        comments.style.display = 'block'
+        comments.innerHTML = ''
         for(let p = 0 ; p < commentsItems.length ; p++)
-            current.appendChild(createComment(commentsItems[p].body , commentsItems[p].author.profile_image))
-        let newComment = document.createElement('div')
+            comments.prepend(createComment(commentsItems[p].body , commentsItems[p].author.profile_image))
+        
         tokenItem = localStorage.getItem('token') ||  null;
-        newComment.className = 'newComment';
+      
+        if(!document.querySelector(`.newComment${id}`)  && tokenItem){
+            let newComment = document.createElement('div')
+            newComment.className = `newComment${id}`;
             newComment.innerHTML = `
             <input type='text'  id='comment${id}' >
             <button type='button' class= 'addComment' onclick  = 'addComment(${id})'>send</button>
             `
             current.appendChild(newComment)
-        if(!tokenItem){
-            newComment.style.display = 'none'   
         }
+        else if (document.querySelector(`.newComment${id}`)){
+            document.querySelector(`.newComment${id}`).display = 'block'
+        }
+       
        
    })
    .catch(error => console.log(error))
@@ -181,14 +191,15 @@ function showComments(id){
 function addComment(id){
     let token = localStorage.getItem('token') ||  null;
     let commebtBody = document.getElementById(`comment${id}`).value;
+    let comments =document.querySelector(`.comments${id}`)
     let div = document.getElementById('succAdd');
     axios.post(`https://tarmeezacademy.com/api/v1/posts/${id}/comments`,{body:commebtBody}, {
         headers: {
             'authorization' : `Bearer ${token}` 
         }})
         .then(response=>{
-            shoeAlert(div)   
-            showComments(id) 
+            comments.prepend(createComment(commebtBody, userInfo.profile_image))
+             shoeAlert(div) ;
         })
         .catch(error=>{
            shoeAlert(div.nextElementSibling)
@@ -234,14 +245,18 @@ function deletePost(postId , postItem){
     }
     
 }
-document.querySelector('.profile').setAttribute('onclick' , `showProfile(${userInfo.id})`)
+document.querySelector('.profile').onclick = ()=>{
+     tokenItem = localStorage.getItem('token') ||  null;
+     if(tokenItem)
+        showProfile(userInfo.id)
+}
 function reset(display){
     let modify = document.querySelectorAll('.post div  button')
     modify.forEach(item => item.style.display= display)
 }
 
 function showProfile(id){
-    deletePosts()
+    posts.innerHTML = ''
     axios(`https://tarmeezacademy.com/api/v1/users/${id}`)
     .then(response=> {
         let items = response.data.data;
@@ -271,46 +286,14 @@ function showProfile(id){
         
     })
     .catch(err => console.log(err))
+    onscroll = null;
     createPosts(false , 1 , `https://tarmeezacademy.com/api/v1/users/${id}/posts`)
-        let page = 1;
-        onscroll = ()=>{
-            let end =  (window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight
-            if(end && page <= lastPage){
-                page++;
-                createPosts(false , page , `https://tarmeezacademy.com/api/v1/users/${id}/posts`)  
-            }
-        else if(page > lastPage)
-            alert('no posts')
-        }
-            
-}
-function deletePosts(){
-    for( let i = 0 ; i < posts.children.length; i++)
-        posts.children[i].style.display = 'none'
-    onscroll = null
-}
-function rePost(){
-    for(let i = 0 ; i < posts.children.length ; i++){
-        posts.children[i].style.display = 'initial'
-        onscroll = scrolling
-        if(posts.children[i].getAttribute('class'))
-            if(posts.children[i].className !== 'post')
-                  posts.children[i].style.display = 'none'
-        if(!posts.children[i].getAttribute('class'))
-            posts.children[i].style.display = 'none'
-        let comments = document.querySelectorAll('.comment')||  [];
-        let inputs = document.querySelectorAll('input')||  [];
-        let buttons = document.querySelectorAll('.addComment')||  [];
-        comments.forEach(comment => comment.remove())
-        inputs.forEach(input =>input.remove())
-        buttons.forEach(button =>button.remove())
       
-    }
 }
-let bars =document.querySelector('.fa-bars') 
+
+let bars =document.querySelector('.bars') 
 bars.onclick =()=>{
     document.querySelector('header').classList.toggle('showHeader');
+    bars.classList.toggle('X')
 }
-document.querySelector('header').onclick = ()=>{
- bars.click()
-}
+document.querySelector('header').onclick = ()=> bars.click()

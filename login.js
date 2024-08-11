@@ -38,6 +38,8 @@ cancel2.onclick =()=>{
     cancel.click()
 }
 
+
+
 function loginCase(){
     head.innerHTML = `
             <button onclick = 'login()' type="button">Log In</button>
@@ -46,7 +48,7 @@ function loginCase(){
     document.getElementById('register').onclick = ()=> location = 'Registeration.html'
     addPost.style.display = 'none';
     reset('none')
-    let addComments = document.querySelectorAll('.newComment') || [];
+    let addComments = document.querySelectorAll('[class^="newComment"') || [];
     addComments.forEach(add => add.style.display = 'none')
 }
 function logoutCase(){
@@ -61,9 +63,8 @@ function logoutCase(){
     `
     reset('initial')
     addPost.style.display = 'initial';
-    let addComments = document.querySelectorAll('.newComment') || [];
+    let addComments = document.querySelectorAll('[class^="newComment"') || [];
     addComments.forEach(add => add.style.display = 'flex')
- 
 }
 function updateNavBar(){
     token = localStorage.getItem('token') ||  null;

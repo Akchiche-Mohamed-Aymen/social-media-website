@@ -11,6 +11,7 @@ body{
 }
 .bars{
     display: none;
+
 }
 .container{
     max-width: 700px;
@@ -70,6 +71,7 @@ header button:hover{
     max-width: 700px;
     width: 100%;
 }
+
 .profile-img {
     background-color:rgba(169, 169, 169, 0.331);
     margin-bottom: 8px;
@@ -183,17 +185,17 @@ header #logout:hover{
     right: -1000000px;
     bottom: 10px;
 }
-.newComment{
+[class^='newComment']{
     display: flex;
     align-items: center;
     gap: 5px;
 }
-.newComment input{
+[class^='newComment'] input{
     width: 85%;
     border-radius: 2px;
     padding: 20px;
 }
-.newComment button{
+[class^='newComment'] button{
     width: fit-content;
     color: white;
     background-color: rgba(0, 0, 255, 0.831);
@@ -272,6 +274,13 @@ header #logout:hover{
     margin: 40px auto;
     border-radius: 5px;
 }
+.bars div{
+    height: 5px;
+    width: 30px;
+    background-color: black;
+    border-radius: 5px;
+}
+
 @media (max-width: 650px ){
     *{font-weight: 400;}
     .tag{display: block; margin: 0 0 5px 10px; min-width: 100px; text-align: center;}
@@ -291,18 +300,22 @@ header #logout:hover{
     header #addPost{
         margin:  auto;
        
-    }
+    }   
     .posts{
-        margin: 0;
+        margin: 100px 0 0;
     }
     .bars{
         display: block;
+        cursor: pointer;
         position: fixed;
         top:0;
-        z-index: 2000;
-        i{
-            cursor: pointer;
-        }
+        z-index: 200000;
+        width: 100%;
+   
+    }
+    .bars div{
+        margin: 3px auto;
+        
     }
     .posts .post{
         max-width: 95vw;
@@ -311,7 +324,27 @@ header #logout:hover{
     .container .showHeader{
         position: fixed;
         left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        height: fit-content;
+        border: 2px solid red;
+        border-radius:5px ;
+        top: 0;
         z-index: 200;
         transition: 3s;
     }
+ .X div{width: 35px;} 
+.X {padding: 10px;}
+.X div:first-child{
+      transform: rotate(-45deg);
+       margin: 0 auto;
+    }
+.X div:nth-child(2){
+    display: none;
+}
+.X div:last-child{
+  transform: rotate(45deg);
+     margin: 0 auto;
+}
 }
